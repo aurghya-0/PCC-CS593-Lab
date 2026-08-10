@@ -1,0 +1,17 @@
+.java-code-block {
+  max-height: 480px;
+  overflow: auto;
+}
+
+.java-code-block pre {
+  margin: 0 !important;
+}
+
+/* Prevent global inline `code` styles from affecting highlighted tokens */
+.java-code-block code,
+.java-code-block span {
+  background: transparent !important;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}

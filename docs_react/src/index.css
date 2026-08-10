@@ -282,7 +282,32 @@ code {
 
 .program-description {
   color: var(--text-muted);
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.program-text {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.how-it-works-list {
+  padding-left: 1.35rem;
+  margin: 0;
+}
+
+.how-it-works-list li {
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.how-it-works-list li::marker {
+  color: var(--primary);
+  font-weight: 600;
 }
 
 .program-section {

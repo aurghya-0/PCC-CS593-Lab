@@ -16,7 +16,28 @@ export default function ProgramCard({ program, index }) {
         )}
       </div>
 
-      <p className="program-description">{program.description}</p>
+      <div className="program-section">
+        <h4>Overview</h4>
+        <p className="program-description">{program.description}</p>
+      </div>
+
+      {program.purpose && (
+        <div className="program-section">
+          <h4>Purpose</h4>
+          <p className="program-text">{program.purpose}</p>
+        </div>
+      )}
+
+      {program.howItWorks && program.howItWorks.length > 0 && (
+        <div className="program-section">
+          <h4>How It Works</h4>
+          <ol className="how-it-works-list">
+            {program.howItWorks.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+        </div>
+      )}
 
       {program.classes && program.classes.length > 0 && (
         <div className="program-section">
@@ -67,7 +88,7 @@ export default function ProgramCard({ program, index }) {
 
       {program.notes && program.notes.length > 0 && (
         <div className="program-section">
-          <h4>Key Concepts</h4>
+          <h4>Key Concepts & Takeaways</h4>
           <ul className="notes-list">
             {program.notes.map((note) => (
               <li key={note}>{note}</li>

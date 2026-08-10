@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173/PCC-CS593/](http://localhost:5173/PCC-CS593/) in your browser.
+Open [http://localhost:5173/PCC-CS593-Lab/](http://localhost:5173/PCC-CS593-Lab/) in your browser.
 
 ## Build for GitHub Pages
 
@@ -37,19 +37,17 @@ git push
 2. Go to **Settings → Pages** in your GitHub repo.
 3. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
 4. Select your default branch (`main` or `master`) and folder **`/docs`**.
-5. Save. Your site will be live at: `https://<your-username>.github.io/PCC-CS593/`
+5. Save. Your site will be live at: `https://<your-username>.github.io/PCC-CS593-Lab/`
 
 ## Configuration
 
-If your repository name differs from `PCC-CS593`, update these two files:
+If your repository name differs, update **only** `REPO_BASE` in `vite.config.js`:
 
 ```js
-// vite.config.js
-base: '/YOUR-REPO-NAME/'
-
-// src/main.jsx
-<BrowserRouter basename="/YOUR-REPO-NAME">
+const REPO_BASE = '/YOUR-REPO-NAME/';
 ```
+
+The router basename is derived automatically from this at build time.
 
 ## Project Structure
 

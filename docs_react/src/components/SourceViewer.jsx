@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { getProgramSourceFiles, getSourceUrl } from '../utils/sourceFiles';
-import CodeBlock from './CodeBlock';
 import './SourceViewer.css';
+
+const JavaCodeBlock = lazy(() => import('./JavaCodeBlock'));
 
 async function fetchSource(url) {
   const response = await fetch(url);
@@ -113,8 +114,10 @@ export default function SourceViewer({ program }) {
           {loading && <p className="source-status">Loading source...</p>}
           {error && <p className="source-error">{error}</p>}
           {activeSource && !loading && (
-            <div className="source-code-wrap">
-              <CodeBlock>{activeSource}</CodeBlock>
+            <div className="source-code-wrap java-code-block">
+              <Suspense fallback={<p className="source-status">Highlighting source...</p>}>
+                <JavaCodeBlock code={activeSource} />
+              </Suspense>
             </div>
           )}
           {!loading && !error && !activeSource && (
