@@ -50,5 +50,5 @@ target/
 .gradle/
 build/
 
-# Cursor / local assets
-assets/
+# Cursor / local assets (root only — do not ignore docs/assets/ for GitHub Pages)
+/assets/
