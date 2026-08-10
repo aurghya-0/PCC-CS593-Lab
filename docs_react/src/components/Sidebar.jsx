@@ -38,6 +38,9 @@ export default function Sidebar({ open, onClose }) {
             Utilities
           </NavLink>
         </nav>
+        <div className="sidebar-footer">
+          Built with <span className="sidebar-heart">&lt;3</span> for students
+        </div>
       </aside>
     </>
   );

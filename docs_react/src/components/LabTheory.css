@@ -1,0 +1,196 @@
+.theory {
+  --theory-color: var(--primary);
+  --theory-bg: var(--primary-light);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+.theory-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.theory-header-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--theory-bg);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--theory-color);
+  flex-shrink: 0;
+}
+
+.theory-header-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.theory-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.theory-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.1rem 0 0;
+}
+
+.theory-overview {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Prerequisites */
+.theory-prereq-box {
+  background: var(--theory-bg);
+  border: 1px solid color-mix(in srgb, var(--theory-color) 20%, var(--border));
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.theory-prereq-box h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--theory-color);
+  margin-bottom: 0.65rem;
+}
+
+.theory-prereq-box ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.theory-prereq-box li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0.25rem;
+}
+
+/* Topic cards grid */
+.theory-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.theory-topic-card {
+  background: #fafbfc;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.15rem 1.25rem;
+  position: relative;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.theory-topic-card:hover {
+  border-color: color-mix(in srgb, var(--theory-color) 30%, var(--border));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.theory-topic-num {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--theory-color);
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.theory-topic-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.theory-topic-summary {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+}
+
+.theory-topic-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.theory-topic-card li {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 0.2rem;
+}
+
+.theory-topic-card li::marker {
+  color: var(--theory-color);
+}
+
+/* Glossary */
+.theory-glossary h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.theory-glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.theory-glossary-card {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+
+.theory-glossary-card dt {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--theory-color);
+  margin-bottom: 0.2rem;
+}
+
+.theory-glossary-card dd {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .theory {
+    padding: 1.25rem;
+  }
+
+  .theory-topics-grid {
+    grid-template-columns: 1fr;
+  }
+}

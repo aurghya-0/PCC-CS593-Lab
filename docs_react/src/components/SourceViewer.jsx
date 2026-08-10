@@ -18,12 +18,18 @@ export default function SourceViewer({ labFolder, program }) {
   const [activeFile, setActiveFile] = useState('');
   const [sources, setSources] = useState({});
   const [loading, setLoading] = useState(false);
+  const [resolving, setResolving] = useState(true);
   const [error, setError] = useState(null);
+
+  const programName = program?.name ?? '';
 
   useEffect(() => {
     let cancelled = false;
 
-    resolveProgramSourceFiles(labFolder, program)
+    setResolving(true);
+    setError(null);
+
+    resolveProgramSourceFiles(labFolder, { name: programName })
       .then((files) => {
         if (!cancelled) {
           setSourceFiles(files);
@@ -33,13 +39,19 @@ export default function SourceViewer({ labFolder, program }) {
       .catch((err) => {
         if (!cancelled) {
           setError(err.message);
+          setSourceFiles([]);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setResolving(false);
         }
       });
 
     return () => {
       cancelled = true;
     };
-  }, [labFolder, program]);
+  }, [labFolder, programName]);
 
   useEffect(() => {
     if (!open || sourceFiles.length === 0) return;
@@ -79,10 +91,9 @@ export default function SourceViewer({ labFolder, program }) {
     };
   }, [open, sourceFiles]);
 
-  if (sourceFiles.length === 0 && !error) return null;
-
   const activeSource = sources[activeFile];
   const programKey = getProgramKey(program);
+  const canToggle = sourceFiles.length > 0 && !resolving;
 
   async function copySource() {
     if (!activeSource) return;
@@ -100,15 +111,20 @@ export default function SourceViewer({ labFolder, program }) {
         className={`source-toggle ${open ? 'source-toggle--open' : ''}`}
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
-        disabled={sourceFiles.length === 0}
+        disabled={!canToggle}
       >
         <span>{open ? 'Hide Source Code' : 'View Source Code'}</span>
-        {sourceFiles.length > 0 && (
+        {resolving && (
+          <span className="source-toggle-count">Loading...</span>
+        )}
+        {!resolving && sourceFiles.length > 0 && (
           <span className="source-toggle-count">
             {sourceFiles.length} file{sourceFiles.length > 1 ? 's' : ''}
           </span>
         )}
       </button>
+
+      {error && !open && <p className="source-error source-error--inline">{error}</p>}
 
       {open && (
         <div className="source-panel">
@@ -133,7 +149,7 @@ export default function SourceViewer({ labFolder, program }) {
 
           {sourceFiles.length > 0 && (
             <div className="source-toolbar">
-              <code className="source-file-path">{activeFile || `${labFolder}/${programKey}`}</code>
+              <code className="source-file-path">{activeFile || `${labFolder}/${programKey}.java`}</code>
               {activeSource && (
                 <button type="button" className="source-copy-btn" onClick={copySource}>
                   Copy
@@ -153,7 +169,7 @@ export default function SourceViewer({ labFolder, program }) {
           {!loading && !error && !activeSource && sourceFiles.length > 0 && (
             <p className="source-status">Select a file to view its source.</p>
           )}
-          {!loading && sourceFiles.length === 0 && !error && (
+          {!loading && !resolving && sourceFiles.length === 0 && !error && (
             <p className="source-status">No source files found for {programKey}.</p>
           )}
         </div>

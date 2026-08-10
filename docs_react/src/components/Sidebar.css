@@ -84,6 +84,20 @@
   border-radius: 999px;
 }
 
+.sidebar-footer {
+  padding: 1rem 1rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.sidebar-heart {
+  color: #f472b6;
+  font-weight: 600;
+}
+
 .sidebar-overlay {
   display: none;
 }

@@ -2,12 +2,13 @@
 
 > **Note:** This folder contains the original markdown documentation. The published site for GitHub Pages is built from [`docs_react/`](../docs_react/) into the [`docs/`](../docs/) folder.
 
-Complete documentation for all **59 source files** and utility scripts in this repository.
+Complete documentation for all **69 source files** and utility scripts in this repository.
 
 ## Lab Documentation
 
 | Lab | Topic | Files | Documentation |
 |-----|-------|-------|---------------|
+| Lab 0 | Java Syntax Basics | 10 | [Lab_0.md](Lab_0.md) |
 | Lab 1 | Class, Constructor, Overloading, Inheritance, Overriding | 10 | [Lab_1.md](Lab_1.md) |
 | Lab 2 | Wrapper Class and Arrays | 8 | [Lab_2.md](Lab_2.md) |
 | Lab 3 | Developing Interfaces | 8 | [Lab_3.md](Lab_3.md) |
@@ -22,6 +23,18 @@ Complete documentation for all **59 source files** and utility scripts in this r
 | `compile_all.sh` | [UTILITIES.md](UTILITIES.md) |
 
 ## Complete File Listing
+
+### Lab 0 (10 files)
+- `Lab_0/Program1_HelloWorld.java`
+- `Lab_0/Program2_VariablesAndDataTypes.java`
+- `Lab_0/Program3_Operators.java`
+- `Lab_0/Program4_InputOutput.java`
+- `Lab_0/Program5_IfElse.java`
+- `Lab_0/Program6_SwitchCase.java`
+- `Lab_0/Program7_ForLoop.java`
+- `Lab_0/Program8_WhileDoWhile.java`
+- `Lab_0/Program9_ArraysBasics.java`
+- `Lab_0/Program10_Methods.java`
 
 ### Lab 1 (10 files)
 - `Lab_1/Program1_StudentClassObject.java`

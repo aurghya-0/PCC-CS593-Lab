@@ -1,13 +1,14 @@
 # PCC-CS593 — Object Oriented Programming Lab (Java)
 
-Java lab programs for **B.Tech CSE Semester V**, based on the MAKAUT West Bengal OOP Lab syllabus. The repository contains **50 programs** organized across **6 lab modules**.
+Java lab programs for **B.Tech CSE Semester V**, based on the MAKAUT West Bengal OOP Lab syllabus. The repository contains **60 programs** organized across **7 lab modules** (including a Java basics primer).
 
-**Live documentation:** [GitHub Pages site](https://github.com) *(enable Pages from the `/docs` folder — see below)*
+**Live documentation:** [aurghya-0.github.io/PCC-CS593-Lab](https://aurghya-0.github.io/PCC-CS593-Lab/)
 
 ## Syllabus Coverage
 
 | Lab | Topic | Programs |
 |-----|-------|----------|
+| Lab 0 | Java Syntax Basics | 10 |
 | Lab 1 | Class, Constructor, Overloading, Inheritance, Overriding | 10 |
 | Lab 2 | Wrapper Class and Arrays | 8 |
 | Lab 3 | Developing Interfaces | 8 |
@@ -33,6 +34,7 @@ javac -version
 
 ```
 PCC-CS593/
+├── Lab_0/                  # Java syntax basics
 ├── Lab_1/                  # OOP fundamentals
 ├── Lab_2/                  # Wrapper classes & arrays
 ├── Lab_3/                  # Interfaces
@@ -48,6 +50,14 @@ PCC-CS593/
 ```
 
 ## Running Programs
+
+### Lab 0 (Java basics)
+
+```bash
+cd Lab_0
+javac Program1_HelloWorld.java
+java Program1_HelloWorld
+```
 
 ### Lab 1, 2, 3, 5 (single-file programs)
 
@@ -81,7 +91,8 @@ java Program2_DrawLines
 
 ```bash
 chmod +x compile_all.sh
-./compile_all.sh        # compile & run all labs
+./compile_all.sh        # compile & run all labs (0 through 6)
+./compile_all.sh 0      # Lab 0 only
 ./compile_all.sh 3      # Lab 3 only
 ```
 
@@ -111,7 +122,7 @@ Each program on the docs site has a **View Source Code** button to read the Java
 Original markdown documentation is in [`docs_md/`](docs_md/):
 
 - [Documentation Index](docs_md/README.md)
-- [Lab 1](docs_md/Lab_1.md) · [Lab 2](docs_md/Lab_2.md) · [Lab 3](docs_md/Lab_3.md)
+- [Lab 0](docs_md/Lab_0.md) · [Lab 1](docs_md/Lab_1.md) · [Lab 2](docs_md/Lab_2.md) · [Lab 3](docs_md/Lab_3.md)
 - [Lab 4](docs_md/Lab_4.md) · [Lab 5](docs_md/Lab_5.md) · [Lab 6](docs_md/Lab_6.md)
 - [Utilities](docs_md/UTILITIES.md)
 

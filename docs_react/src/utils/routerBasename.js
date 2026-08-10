@@ -7,13 +7,28 @@ export function getRouterBasename() {
     return '';
   }
 
-  const { pathname } = window.location;
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  const appRoutes = new Set(['lab', 'utilities']);
 
-  // GitHub Pages project site: https://<user>.github.io/<repo>/
-  const projectMatch = pathname.match(/^\/([^/]+)/);
-  if (projectMatch && projectMatch[1] !== 'assets') {
-    return `/${projectMatch[1]}`;
+  // GitHub Pages project site: /repo-name/lab/1 → basename is /repo-name
+  if (segments.length > 0 && !appRoutes.has(segments[0])) {
+    return `/${segments[0]}`;
   }
 
   return '';
+}
+
+/**
+ * Resolve a path to a static asset in /public (manifest, source files, etc.).
+ * Must be root-absolute so fetches work from nested routes like /lab/1.
+ */
+export function getPublicUrl(relativePath) {
+  const path = relativePath.replace(/^\//, '');
+  const basename = getRouterBasename();
+
+  if (import.meta.env.DEV) {
+    return `/${path}`;
+  }
+
+  return basename ? `${basename}/${path}` : `/${path}`;
 }

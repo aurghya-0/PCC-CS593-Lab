@@ -1,4 +1,36 @@
 {
+  "Lab_0": {
+    "Program10_Methods": [
+      "Lab_0/Program10_Methods.java"
+    ],
+    "Program1_HelloWorld": [
+      "Lab_0/Program1_HelloWorld.java"
+    ],
+    "Program2_VariablesAndDataTypes": [
+      "Lab_0/Program2_VariablesAndDataTypes.java"
+    ],
+    "Program3_Operators": [
+      "Lab_0/Program3_Operators.java"
+    ],
+    "Program4_InputOutput": [
+      "Lab_0/Program4_InputOutput.java"
+    ],
+    "Program5_IfElse": [
+      "Lab_0/Program5_IfElse.java"
+    ],
+    "Program6_SwitchCase": [
+      "Lab_0/Program6_SwitchCase.java"
+    ],
+    "Program7_ForLoop": [
+      "Lab_0/Program7_ForLoop.java"
+    ],
+    "Program8_WhileDoWhile": [
+      "Lab_0/Program8_WhileDoWhile.java"
+    ],
+    "Program9_ArraysBasics": [
+      "Lab_0/Program9_ArraysBasics.java"
+    ]
+  },
   "Lab_1": {
     "Program10_MethodOverriding": [
       "Lab_1/Program10_MethodOverriding.java"

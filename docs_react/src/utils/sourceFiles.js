@@ -1,8 +1,10 @@
+import { getPublicUrl } from './routerBasename';
+
 let manifestPromise = null;
 
 async function loadManifest() {
   if (!manifestPromise) {
-    const url = new URL('sources-manifest.json', import.meta.env.BASE_URL).href;
+    const url = getPublicUrl('sources-manifest.json');
     manifestPromise = fetch(url).then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to load sources manifest (${response.status})`);
@@ -23,9 +25,20 @@ export function getProgramKey(program) {
 export async function resolveProgramSourceFiles(labFolder, program) {
   const manifest = await loadManifest();
   const programKey = getProgramKey(program);
-  return manifest[labFolder]?.[programKey] ?? [];
+  const fromManifest = manifest[labFolder]?.[programKey];
+
+  if (fromManifest?.length) {
+    return fromManifest;
+  }
+
+  // Fallback when manifest is stale or entry is missing
+  if (program.name?.endsWith('.java')) {
+    return [`${labFolder}/${program.name}`];
+  }
+
+  return [];
 }
 
 export function getSourceUrl(filePath) {
-  return new URL(`sources/${filePath}`, import.meta.env.BASE_URL).href;
+  return getPublicUrl(`sources/${filePath}`);
 }

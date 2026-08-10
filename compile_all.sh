@@ -3,6 +3,14 @@
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
+compile_lab0() {
+    echo "=== Lab 0 ==="
+    for f in Lab_0/Program*.java; do
+        echo "Compiling $f..."
+        javac "$f" && java -cp Lab_0 "$(basename "$f" .java)"
+    done
+}
+
 compile_lab1() {
     echo "=== Lab 1 ==="
     for f in Lab_1/Program*.java; do
@@ -52,6 +60,7 @@ compile_lab6() {
 }
 
 case "${1:-all}" in
+    0) compile_lab0 ;;
     1) compile_lab1 ;;
     2) compile_lab2 ;;
     3) compile_lab3 ;;
@@ -59,6 +68,7 @@ case "${1:-all}" in
     5) compile_lab5 ;;
     6) compile_lab6 ;;
     all)
+        compile_lab0
         compile_lab1
         compile_lab2
         compile_lab3
@@ -66,5 +76,5 @@ case "${1:-all}" in
         compile_lab5
         compile_lab6
         ;;
-    *) echo "Usage: $0 [1|2|3|4|5|6|all]" ;;
+    *) echo "Usage: $0 [0|1|2|3|4|5|6|all]" ;;
 esac

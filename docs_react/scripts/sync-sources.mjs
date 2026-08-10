@@ -26,7 +26,7 @@ function collectJavaFiles(dir, relativeTo = repoRoot) {
 function buildManifest() {
   const manifest = {};
 
-  for (let i = 1; i <= 6; i++) {
+  for (let i = 0; i <= 6; i++) {
     const labFolder = `Lab_${i}`;
     const labPath = path.join(repoRoot, labFolder);
     if (!fs.existsSync(labPath)) continue;

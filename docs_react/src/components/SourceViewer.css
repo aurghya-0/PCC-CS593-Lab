@@ -21,7 +21,7 @@
   transition: background 0.15s, border-color 0.15s;
 }
 
-.source-toggle:hover {
+.source-toggle:hover:not(:disabled) {
   background: #e2e8f0;
   border-color: #cbd5e1;
 }
@@ -138,4 +138,11 @@
   color: #b91c1c;
   background: #fef2f2;
   font-size: 0.875rem;
+}
+
+.source-error--inline {
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius);
+  border: 1px solid #fecaca;
 }
