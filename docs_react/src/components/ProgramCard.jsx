@@ -1,7 +1,7 @@
 import CodeBlock from './CodeBlock';
 import SourceViewer from './SourceViewer';
 
-export default function ProgramCard({ program, index }) {
+export default function ProgramCard({ program, index, labFolder }) {
   return (
     <article className="program-card" id={`program-${index + 1}`}>
       <div className="program-card-header">
@@ -97,7 +97,7 @@ export default function ProgramCard({ program, index }) {
         </div>
       )}
 
-      <SourceViewer program={program} />
+      <SourceViewer labFolder={labFolder} program={program} />
     </article>
   );
 }

@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { getProgramSourceFiles, getSourceUrl } from '../utils/sourceFiles';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { getProgramKey, getSourceUrl, resolveProgramSourceFiles } from '../utils/sourceFiles';
 import './SourceViewer.css';
 
 const JavaCodeBlock = lazy(() => import('./JavaCodeBlock'));
@@ -12,13 +12,34 @@ async function fetchSource(url) {
   return response.text();
 }
 
-export default function SourceViewer({ program }) {
-  const sourceFiles = useMemo(() => getProgramSourceFiles(program), [program]);
+export default function SourceViewer({ labFolder, program }) {
+  const [sourceFiles, setSourceFiles] = useState([]);
   const [open, setOpen] = useState(false);
-  const [activeFile, setActiveFile] = useState(sourceFiles[0] || '');
+  const [activeFile, setActiveFile] = useState('');
   const [sources, setSources] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    resolveProgramSourceFiles(labFolder, program)
+      .then((files) => {
+        if (!cancelled) {
+          setSourceFiles(files);
+          setActiveFile(files[0] || '');
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setError(err.message);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [labFolder, program]);
 
   useEffect(() => {
     if (!open || sourceFiles.length === 0) return;
@@ -58,9 +79,10 @@ export default function SourceViewer({ program }) {
     };
   }, [open, sourceFiles]);
 
-  if (sourceFiles.length === 0) return null;
+  if (sourceFiles.length === 0 && !error) return null;
 
   const activeSource = sources[activeFile];
+  const programKey = getProgramKey(program);
 
   async function copySource() {
     if (!activeSource) return;
@@ -78,13 +100,20 @@ export default function SourceViewer({ program }) {
         className={`source-toggle ${open ? 'source-toggle--open' : ''}`}
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
+        disabled={sourceFiles.length === 0}
       >
         <span>{open ? 'Hide Source Code' : 'View Source Code'}</span>
-        <span className="source-toggle-count">{sourceFiles.length} file{sourceFiles.length > 1 ? 's' : ''}</span>
+        {sourceFiles.length > 0 && (
+          <span className="source-toggle-count">
+            {sourceFiles.length} file{sourceFiles.length > 1 ? 's' : ''}
+          </span>
+        )}
       </button>
 
       {open && (
         <div className="source-panel">
+          {error && <p className="source-error">{error}</p>}
+
           {sourceFiles.length > 1 && (
             <div className="source-tabs" role="tablist">
               {sourceFiles.map((file) => (
@@ -102,17 +131,18 @@ export default function SourceViewer({ program }) {
             </div>
           )}
 
-          <div className="source-toolbar">
-            <code className="source-file-path">{activeFile}</code>
-            {activeSource && (
-              <button type="button" className="source-copy-btn" onClick={copySource}>
-                Copy
-              </button>
-            )}
-          </div>
+          {sourceFiles.length > 0 && (
+            <div className="source-toolbar">
+              <code className="source-file-path">{activeFile || `${labFolder}/${programKey}`}</code>
+              {activeSource && (
+                <button type="button" className="source-copy-btn" onClick={copySource}>
+                  Copy
+                </button>
+              )}
+            </div>
+          )}
 
           {loading && <p className="source-status">Loading source...</p>}
-          {error && <p className="source-error">{error}</p>}
           {activeSource && !loading && (
             <div className="source-code-wrap java-code-block">
               <Suspense fallback={<p className="source-status">Highlighting source...</p>}>
@@ -120,8 +150,11 @@ export default function SourceViewer({ program }) {
               </Suspense>
             </div>
           )}
-          {!loading && !error && !activeSource && (
+          {!loading && !error && !activeSource && sourceFiles.length > 0 && (
             <p className="source-status">Select a file to view its source.</p>
+          )}
+          {!loading && sourceFiles.length === 0 && !error && (
+            <p className="source-status">No source files found for {programKey}.</p>
           )}
         </div>
       )}

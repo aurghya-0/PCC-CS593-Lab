@@ -1,24 +1,31 @@
-/**
- * Resolve repository-relative paths to Java source files for a program entry.
- */
-export function getProgramSourceFiles(program) {
-  if (program.sourceFiles?.length) {
-    return program.sourceFiles;
-  }
+let manifestPromise = null;
 
-  if (program.files?.length && program.path) {
-    const base = program.path.replace(/\/$/, '');
-    return program.files.map((file) => `${base}/${file}`);
+async function loadManifest() {
+  if (!manifestPromise) {
+    const url = new URL('sources-manifest.json', import.meta.env.BASE_URL).href;
+    manifestPromise = fetch(url).then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load sources manifest (${response.status})`);
+      }
+      return response.json();
+    });
   }
+  return manifestPromise;
+}
 
-  if (program.path?.endsWith('.java')) {
-    return [program.path];
+export function getProgramKey(program) {
+  if (program.name.endsWith('.java')) {
+    return program.name.replace(/\.java$/, '');
   }
+  return program.name;
+}
 
-  return [];
+export async function resolveProgramSourceFiles(labFolder, program) {
+  const manifest = await loadManifest();
+  const programKey = getProgramKey(program);
+  return manifest[labFolder]?.[programKey] ?? [];
 }
 
 export function getSourceUrl(filePath) {
-  const base = import.meta.env.BASE_URL;
-  return `${base}sources/${filePath.split('/').map(encodeURIComponent).join('/')}`;
+  return new URL(`sources/${filePath}`, import.meta.env.BASE_URL).href;
 }

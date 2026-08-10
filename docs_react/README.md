@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173/PCC-CS593-Lab/](http://localhost:5173/PCC-CS593-Lab/) in your browser.
+Open [http://localhost:5173/](http://localhost:5173/) in your browser.
 
 ## Build for GitHub Pages
 
@@ -41,13 +41,9 @@ git push
 
 ## Configuration
 
-If your repository name differs, update **only** `REPO_BASE` in `vite.config.js`:
+No hardcoded repository name is required. The build uses a **relative base path** (`./`) so assets work on any GitHub Pages URL, and the router basename is detected at runtime from the current URL.
 
-```js
-const REPO_BASE = '/YOUR-REPO-NAME/';
-```
-
-The router basename is derived automatically from this at build time.
+Source files are **auto-discovered** from `Lab_1`–`Lab_6` at build time via `scripts/sync-sources.mjs`, which copies `.java` files and generates `sources-manifest.json`. Adding a new program to the repo only requires running `npm run build` — no path updates in the docs data.
 
 ## Project Structure
 

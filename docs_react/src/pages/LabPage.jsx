@@ -45,7 +45,7 @@ export default function LabPage() {
 
       <div className="programs-list">
         {lab.programs.map((program, i) => (
-          <ProgramCard key={program.name} program={program} index={i} />
+          <ProgramCard key={program.name} program={program} index={i} labFolder={lab.folder} />
         ))}
       </div>
 

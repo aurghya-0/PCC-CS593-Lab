@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "copy-sources": "node scripts/copy-sources.mjs",
-    "predev": "npm run copy-sources",
+    "sync-sources": "node scripts/sync-sources.mjs",
+    "predev": "npm run sync-sources",
     "dev": "vite",
-    "prebuild": "npm run copy-sources",
+    "prebuild": "npm run sync-sources",
     "build": "vite build",
     "postbuild": "cp ../docs/index.html ../docs/404.html",
     "preview": "vite preview"

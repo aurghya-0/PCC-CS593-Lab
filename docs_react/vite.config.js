@@ -5,13 +5,10 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// GitHub Pages project site: https://<user>.github.io/<repo-name>/
-// Must match your GitHub repository name exactly.
-const REPO_BASE = '/PCC-CS593-Lab/';
-
+// Relative base — works on any GitHub Pages repo name without hardcoding the path.
 export default defineConfig({
   plugins: [react()],
-  base: REPO_BASE,
+  base: './',
   build: {
     outDir: path.resolve(__dirname, '../docs'),
     emptyOutDir: true,
