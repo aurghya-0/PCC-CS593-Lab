@@ -1,0 +1,76 @@
+export const lab3 = {
+  id: 3,
+  slug: 'lab-3',
+  title: 'Lab 3 — Developing Interfaces',
+  description:
+    'Java interfaces: basic implementation, multiple interfaces, interface inheritance, multiple inheritance via interfaces, and default/static interface methods.',
+  folder: 'Lab_3',
+  programs: [
+    {
+      name: 'Program1_BasicInterface.java',
+      path: 'Lab_3/Program1_BasicInterface.java',
+      concept: 'Basic interface implementation',
+      description: 'Drawable interface with draw(). Square implements it. Interface reference holds implementing object.',
+      classes: [
+        { name: 'Drawable', role: 'Interface — declares draw()' },
+        { name: 'Square', role: 'Implements Drawable' },
+      ],
+      run: 'cd Lab_3\njavac Program1_BasicInterface.java && java Program1_BasicInterface',
+    },
+    {
+      name: 'Program2_MultipleInterfaces.java',
+      path: 'Lab_3/Program2_MultipleInterfaces.java',
+      concept: 'Implementing multiple interfaces',
+      description: 'Duck implements both Flyable and Swimmable interfaces.',
+      classes: [
+        { name: 'Flyable', role: 'Interface — fly()' },
+        { name: 'Swimmable', role: 'Interface — swim()' },
+        { name: 'Duck', role: 'Implements both' },
+      ],
+      run: 'javac Program2_MultipleInterfaces.java && java Program2_MultipleInterfaces',
+    },
+    {
+      name: 'Program3_InterfaceExtending.java',
+      path: 'Lab_3/Program3_InterfaceExtending.java',
+      concept: 'Interface extending another interface',
+      description: 'Pet extends Animal (inherits eat()) and adds play(). Cat implements Pet.',
+      run: 'javac Program3_InterfaceExtending.java && java Program3_InterfaceExtending',
+    },
+    {
+      name: 'Program4_MultipleInheritance.java',
+      path: 'Lab_3/Program4_MultipleInheritance.java',
+      concept: 'Multiple inheritance through interfaces',
+      description: 'Car implements both Engine and Wheels — Java allows multiple interface inheritance.',
+      run: 'javac Program4_MultipleInheritance.java && java Program4_MultipleInheritance',
+    },
+    {
+      name: 'Program5_BankAccountInterface.java',
+      path: 'Lab_3/Program5_BankAccountInterface.java',
+      concept: 'Practical interface — bank account',
+      description: 'BankAccount interface with deposit/withdraw/getBalance. SavingsAccount provides concrete implementation.',
+      run: 'javac Program5_BankAccountInterface.java && java Program5_BankAccountInterface',
+    },
+    {
+      name: 'Program6_ShapeInterface.java',
+      path: 'Lab_3/Program6_ShapeInterface.java',
+      concept: 'Interface with multiple implementations',
+      description: 'Shape declares area() and perimeter(). Rectangle and Circle provide their own formulas.',
+      run: 'javac Program6_ShapeInterface.java && java Program6_ShapeInterface',
+    },
+    {
+      name: 'Program7_PrintableInterface.java',
+      path: 'Lab_3/Program7_PrintableInterface.java',
+      concept: 'Polymorphism via interface',
+      description: 'Printable interface with print(). Document and Photo implement it differently.',
+      run: 'javac Program7_PrintableInterface.java && java Program7_PrintableInterface',
+    },
+    {
+      name: 'Program8_DefaultStaticInterface.java',
+      path: 'Lab_3/Program8_DefaultStaticInterface.java',
+      concept: 'Default and static methods in interfaces',
+      description: 'Vehicle has default honk() and static showInfo(). Motorcycle only implements start().',
+      run: 'javac Program8_DefaultStaticInterface.java && java Program8_DefaultStaticInterface',
+      notes: ['default methods (Java 8+)', 'static methods in interfaces'],
+    },
+  ],
+};

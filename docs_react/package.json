@@ -1,0 +1,24 @@
+{
+  "name": "pcc-cs593-docs",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "copy-sources": "node scripts/copy-sources.mjs",
+    "predev": "npm run copy-sources",
+    "dev": "vite",
+    "prebuild": "npm run copy-sources",
+    "build": "vite build",
+    "postbuild": "cp ../docs/index.html ../docs/404.html",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}

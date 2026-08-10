@@ -1,0 +1,68 @@
+export const lab5 = {
+  id: 5,
+  slug: 'lab-5',
+  title: 'Lab 5 — Multithreaded Programming',
+  description:
+    'Thread creation (extending Thread and implementing Runnable), synchronization, thread priorities, inter-thread communication (wait/notify), join, and producer-consumer pattern.',
+  folder: 'Lab_5',
+  programs: [
+    {
+      name: 'Program1_ThreadExtends.java',
+      path: 'Lab_5/Program1_ThreadExtends.java',
+      concept: 'Thread by extending Thread',
+      description: 'MyThread extends Thread and overrides run(). Two instances started with start().',
+      run: 'cd Lab_5\njavac Program1_ThreadExtends.java && java Program1_ThreadExtends',
+    },
+    {
+      name: 'Program2_ThreadRunnable.java',
+      path: 'Lab_5/Program2_ThreadRunnable.java',
+      concept: 'Thread by implementing Runnable',
+      description: 'Task implements Runnable. Two Thread objects share the same Task instance.',
+      run: 'javac Program2_ThreadRunnable.java && java Program2_ThreadRunnable',
+    },
+    {
+      name: 'Program3_ThreadSynchronization.java',
+      path: 'Lab_5/Program3_ThreadSynchronization.java',
+      concept: 'Thread synchronization',
+      description: 'Two threads increment shared Counter 1000 times each. synchronized increment() prevents race conditions.',
+      run: 'javac Program3_ThreadSynchronization.java && java Program3_ThreadSynchronization',
+      output: 'Final count: 2000',
+    },
+    {
+      name: 'Program4_ThreadPriority.java',
+      path: 'Lab_5/Program4_ThreadPriority.java',
+      concept: 'Thread priorities',
+      description: 'Threads assigned MIN_PRIORITY and MAX_PRIORITY via setPriority().',
+      run: 'javac Program4_ThreadPriority.java && java Program4_ThreadPriority',
+    },
+    {
+      name: 'Program5_InterThreadCommunication.java',
+      path: 'Lab_5/Program5_InterThreadCommunication.java',
+      concept: 'Inter-thread communication (wait/notify)',
+      description: 'Message class with synchronized produce() and consume() using wait() and notify().',
+      run: 'javac Program5_InterThreadCommunication.java && java Program5_InterThreadCommunication',
+      notes: ['synchronized methods', 'wait() releases lock', 'notify() wakes waiting thread'],
+    },
+    {
+      name: 'Program6_ThreadJoin.java',
+      path: 'Lab_5/Program6_ThreadJoin.java',
+      concept: 'Thread join()',
+      description: 'Main thread calls worker.join() to wait until worker finishes before continuing.',
+      run: 'javac Program6_ThreadJoin.java && java Program6_ThreadJoin',
+    },
+    {
+      name: 'Program7_MultipleThreads.java',
+      path: 'Lab_5/Program7_MultipleThreads.java',
+      concept: 'Multiple threads with sleep()',
+      description: 'Three Printer threads each print 3 times with 500ms pauses between iterations.',
+      run: 'javac Program7_MultipleThreads.java && java Program7_MultipleThreads',
+    },
+    {
+      name: 'Program8_ProducerConsumer.java',
+      path: 'Lab_5/Program8_ProducerConsumer.java',
+      concept: 'Producer-Consumer pattern',
+      description: 'Bounded SharedQueue (capacity 5) shared between producer and consumer threads using wait()/notifyAll().',
+      run: 'javac Program8_ProducerConsumer.java && java Program8_ProducerConsumer',
+    },
+  ],
+};
