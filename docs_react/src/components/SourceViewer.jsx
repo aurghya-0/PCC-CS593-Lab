@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { getProgramKey, getSourceUrl, resolveProgramSourceFiles } from '../utils/sourceFiles';
+import LiveRunnerModal from './LiveRunnerModal';
 import './SourceViewer.css';
 
 const JavaCodeBlock = lazy(() => import('./JavaCodeBlock'));
@@ -9,7 +10,12 @@ async function fetchSource(url) {
   if (!response.ok) {
     throw new Error(`Failed to load source (${response.status})`);
   }
-  return response.text();
+  const text = await response.text();
+  const trimmed = text.trim();
+  if (trimmed.startsWith('<!DOCTYPE') || trimmed.startsWith('<html') || trimmed.startsWith('<!doctype')) {
+    throw new Error('Failed to load source file (received HTML document)');
+  }
+  return text;
 }
 
 export default function SourceViewer({ labFolder, program }) {
@@ -91,6 +97,8 @@ export default function SourceViewer({ labFolder, program }) {
     };
   }, [open, sourceFiles]);
 
+  const [runnerOpen, setRunnerOpen] = useState(false);
+
   const activeSource = sources[activeFile];
   const programKey = getProgramKey(program);
   const canToggle = sourceFiles.length > 0 && !resolving;
@@ -151,9 +159,14 @@ export default function SourceViewer({ labFolder, program }) {
             <div className="source-toolbar">
               <code className="source-file-path">{activeFile || `${labFolder}/${programKey}.java`}</code>
               {activeSource && (
-                <button type="button" className="source-copy-btn" onClick={copySource}>
-                  Copy
-                </button>
+                <div className="source-toolbar-actions">
+                  <button type="button" className="source-run-btn" onClick={() => setRunnerOpen(true)}>
+                    ⚡ Run Live
+                  </button>
+                  <button type="button" className="source-copy-btn" onClick={copySource}>
+                    Copy
+                  </button>
+                </div>
               )}
             </div>
           )}
@@ -173,6 +186,17 @@ export default function SourceViewer({ labFolder, program }) {
             <p className="source-status">No source files found for {programKey}.</p>
           )}
         </div>
+      )}
+
+      {activeSource && (
+        <LiveRunnerModal
+          isOpen={runnerOpen}
+          onClose={() => setRunnerOpen(false)}
+          initialCode={activeSource}
+          title={programName || activeFile.split('/').pop()}
+          labBadge={labFolder}
+          fileName={activeFile.split('/').pop()}
+        />
       )}
     </div>
   );

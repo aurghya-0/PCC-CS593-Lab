@@ -8,7 +8,7 @@ export function getRouterBasename() {
   }
 
   const segments = window.location.pathname.split('/').filter(Boolean);
-  const appRoutes = new Set(['lab', 'utilities']);
+  const appRoutes = new Set(['lab', 'utilities', 'playground']);
 
   // GitHub Pages project site: /repo-name/lab/1 → basename is /repo-name
   if (segments.length > 0 && !appRoutes.has(segments[0])) {

@@ -31,6 +31,14 @@ export default function Sidebar({ open, onClose }) {
           ))}
           <div className="nav-section">Tools</div>
           <NavLink
+            to="/playground"
+            className={({ isActive }) => `nav-link ${isActive ? 'nav-link--active' : ''}`}
+            onClick={onClose}
+          >
+            ⚡ Live Playground
+            <span className="nav-badge nav-badge--live">LIVE</span>
+          </NavLink>
+          <NavLink
             to="/utilities"
             className={({ isActive }) => `nav-link ${isActive ? 'nav-link--active' : ''}`}
             onClick={onClose}

@@ -140,11 +140,11 @@ export default function Home() {
               source code, and run instructions — from Hello World to multithreading and Swing.
             </p>
             <div className="home-hero-actions">
-              <Link to="/lab/0" className="home-btn home-btn--primary">
+              <Link to="/playground" className="home-btn home-btn--primary">
+                ⚡ Try Live Playground
+              </Link>
+              <Link to="/lab/0" className="home-btn home-btn--ghost">
                 Start with Lab 0
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
               </Link>
               <a href="#labs" className="home-btn home-btn--ghost">
                 Explore labs
